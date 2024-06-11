@@ -1,0 +1,63 @@
+{% include 'layout.html' %}
+
+{% if msg %}
+<div class="mx-auto my-2 alter alter-success" role="alert">
+    {{msg}}
+</div>
+{% endif %}
+
+<div class="container mx-auto my-3">
+    <div class="card text-center">
+        <div class="card-header">
+            Tour Todos
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">List of Todos!</h5>
+            <p class="catd-est">description</p>
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">info</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for todo in todos %}
+                {% if todo.complete == false %}
+                <tr class="pointer">
+                    <td>{{loop.index}}</td>
+                    <td>{{todo.title}}</td>
+                    <td>
+                        <button onclick="window.location.href='/todos/complete/{{todo.id}}'"
+                                type="button" class="btn btn-success">Complete
+                        </button>
+                        <button onclick="window.location.href='/todos/edit-todo/{{todo.id}}'"
+                                type="button" class="btn btn-info">Edit
+                        </button>
+                    </td>
+                </tr>
+                {% else %}
+                <tr class="pointer">
+                    <td>{{loop.index}}</td>
+                    <td class="text-decoration-line-through">{{todo.title}}</td>
+                    <td>
+                        <button onclick="window.location.href='/todos/complete/{{todo.id}}'"
+                                type="button" class="btn btn-warning">Undo
+                        </button>
+                        <button onclick="window.location.href='/todos/edit-todo/{{todo.id}}'"
+                                type="button" class="btn btn-info">Edit
+                        </button>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <a class="btn btn-primary" href="/todos/add-todo">Add anew Todo</a>
+        </div>
+
+    </div>
+</div>
